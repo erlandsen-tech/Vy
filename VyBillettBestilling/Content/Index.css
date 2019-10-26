@@ -1,0 +1,28 @@
+﻿
+.bg {
+    background-image: url('/Resources/Images/background_search.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    margin: 0;
+    width: 100vw;
+    position: relative;
+    min-height: 40%;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+
+.header {
+    text-shadow: 0px 1px #333333;
+}
+
+
+
+.femti {
+    display: inline-block;
+    height: 85%;
+    position: fixed;
+    width: 100%;
+}

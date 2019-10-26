@@ -1,0 +1,188 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background-color: #6d7987;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    color: #070304;
+}
+
+.navbar-color {
+    background-color: #3365a4
+}
+
+.navbar-inverse .navbar-nav li a {
+    color: #ffffff
+}
+
+.navbar-header {
+    background-color: #3365a4
+}
+
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+    background-color: #3365a4
+}
+
+.navbar .navbar-inverse .navbar-fixed-top .navbar-static-top {
+    background-color: #3365a4
+}
+
+.font-weight-bold {
+    font-weight: bold;
+}
+
+.text-color-white {
+    color: floralwhite;
+}
+
+.fixed-button {
+    background-color: lightblue;
+    color: #070304;
+    border: none;
+    outline: none;
+    position: fixed;
+    bottom: 0px;
+    right: 15px;
+    height: 50px;
+    width: 50px;
+    margin-bottom: 20px;
+    border-radius: 30px;
+    box-shadow: 1px 3px 5px #888888;
+}
+
+@keyframes wobble {
+    16.65% {
+        -webkit-transform: translateY(8px);
+        -ms-transform: translateY(8px);
+        transform: translateY(8px);
+    }
+
+    33.3% {
+        -webkit-transform: translateY(-6px);
+        -ms-transform: translateY(-6px);
+        transform: translateY(-6px);
+    }
+
+    49.95% {
+        -webkit-transform: translateY(4px);
+        -ms-transform: translateY(4px);
+        transform: translateY(4px);
+    }
+
+    66.6% {
+        -webkit-transform: translateY(-2px);
+        -ms-transform: translateY(-2px);
+        transform: translateY(-2px);
+    }
+
+    83.25% {
+        -webkit-transform: translateY(1px);
+        -ms-transform: translateY(1px);
+        transform: translateY(1px);
+    }
+
+    100% {
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0);
+    }
+}
+
+.wobble {
+    -webkit-animation-name: wobble;
+    animation-name: wobble;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+}
+
+.show-large {
+    display: none;
+}
+
+@media only screen and (min-width: 767px) {
+    .show-large {
+        display: block;
+    }
+
+    .show-mobile {
+        display: none;
+    }
+}
+
+.my-custom-scrollbar {
+    position: relative;
+    height: 500px;
+    overflow: auto;
+    width: 70vw;
+}
+
+.table-wrapper-scroll-y {
+    display: block;
+    width: 70vw;
+}
+
+.outer {
+    display: table;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.inner {
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    /*whatever width you want*/
+}
+
+.generell-bg {
+    background-color: lightgray;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    margin: 0;
+    width: 100vw;
+    position: relative;
+    min-height: 40%;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+.test {
+    background-color: lightgray;
+}
+.mt-5 {
+  margin-top: 5px !important;
+}
+
+.ml-5 {
+  margin-left: 5px !important;
+}
