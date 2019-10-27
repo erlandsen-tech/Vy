@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLLTester.cs" />
+    <Compile Include="DbTilgangSTUB.cs" />
     <Compile Include="ManageControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

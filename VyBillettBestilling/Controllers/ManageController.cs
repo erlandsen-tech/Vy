@@ -15,12 +15,18 @@ namespace VyBillettBestilling.Controllers
     [Authorize]
     public class ManageController : Controller
     {
+        private IVyDbTilgang _dbTilgang;
         private KonverterModel konverter = new KonverterModel();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
         public ManageController()
         {
+            _dbTilgang = new VyDbTilgang();
+        }
+        public ManageController(IVyDbTilgang stub)
+        {
+            _dbTilgang = stub;
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
