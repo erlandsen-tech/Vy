@@ -198,26 +198,27 @@ namespace EnhetsTest
         }
         public bool OppdaterStasjon(Stasjon stasjon)
         {
-            return (stasjon != null) ? 1 : 0;
+            return (stasjon != null) ? true : false;
         }
         public bool OppdaterStrekning(Hovedstrekning hvst)
         {
-            return (hvst != null) ? 1 : 0;
+            return (hvst != null) ? true  : false;
         }
-        public Passasjertype(int typeId)
+        public Passasjer Passasjertype(int typeId)
         {
-            if(typeId == 1)
+            if (typeId == 1)
             {
                 return passasjer;
             }
+            else return null;
         }
         public bool settInnStasjonerIHovedstrekning(int hovstrId, IList<int> stasjonIder, int plassering)
         {
-            return (hovstrId = 1 && stasjonIder.Contains(1) && plassering == 1);
+            return (hovstrId == 1 && stasjonIder.Contains(1) && plassering == 1);
         }
         public bool settNyeHovedstrekningNavn(int hovstrId, string nyttNavn, string nyttKortnavn)
         {
-            return (hovstrId = 1 && nyttNavn != null && nyttKortnavn != null);
+            return (hovstrId == 1 && nyttNavn != null && nyttKortnavn != null);
         }
         public bool settNyeStasjonKoordinater(int stasjId, double breddegrad, double lengdegrad)
         {
