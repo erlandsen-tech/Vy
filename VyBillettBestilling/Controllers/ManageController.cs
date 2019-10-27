@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using AutoMapper;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
 using VyBillettBestilling.BLL;
 using VyBillettBestilling.BLL.Methods;
 using VyBillettBestilling.DAL;
@@ -144,7 +141,7 @@ namespace VyBillettBestilling.Controllers
             {
                 var dbt = new VyDbTilgang();
                 var mgmt = new ManageMethods();
-                var hvst = 
+                var hvst =
                     mgmt.LagHovedstrekning(konverter.hovedstrekningCreateView(hvstcv));
                 dbt.leggTilHovedstrekning(hvst);
                 return RedirectToAction("StrekningsListe", "Manage");

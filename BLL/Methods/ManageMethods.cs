@@ -71,7 +71,9 @@ namespace VyBillettBestilling.BLL.Methods
                 }
             }
         }
-        //Her burde vi legge inn mulighet for å finne ny index til hver stasjon, men tiden strekker ikke til
+        //Her burde vi legge inn mulighet for å finne ny index til hver stasjon i forhold 
+        //til hvor i strekninge den skal  være
+        //, men tiden strekker ikke til
         private static int finnIndex(List<int> stasjoner)
         {
             return (stasjoner.Count / 2);

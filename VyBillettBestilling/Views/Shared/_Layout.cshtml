@@ -68,14 +68,15 @@
                             {
 
                                 <li>
-                                    <a href="@Url.Action("Index", "Manage")" class="btn btn-primary">Min side -> @System.Web.HttpContext.Current.User.Identity.Name</a>
-                                </li>
+                                <a href="@Url.Action("Index", "Manage")" class="btn btn-primary">Min side for @System.Web.HttpContext.Current.User.Identity.Name </a>                                </li>
                             }
                             <li>
                                 @using (Html.BeginForm("LogOff", "Account"))
                                 {
                                     @Html.AntiForgeryToken()
-                                    <input name="LoggUt" type="submit" value="Logg ut" class="btn btn-primary" />
+                                <button type="submit" class="btn btn-primary logoffbutton">
+                                    <i class="fa fa-sign-out">Logg ut</i>
+                                </button>
                                 }
                             </li>
                         }

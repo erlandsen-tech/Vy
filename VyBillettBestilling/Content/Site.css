@@ -186,3 +186,9 @@ footer {
 .ml-5 {
   margin-left: 5px !important;
 }
+.logoffbutton {
+  max-height: 100%;
+  height: 3.6em;
+  width: 100%;
+  max-width: 100%;
+}

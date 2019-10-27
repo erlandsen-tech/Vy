@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using VyBillettBestilling.BLL.Methods;
 using VyBillettBestilling.Model;
 
@@ -20,7 +16,7 @@ namespace VyBillettBestilling.Controllers
             int StartId, int StoppId, int Voksen, int Barn, int Student, int Honnor, long avreise)
         {
             var hkm = new HandlekurvMethods();
-            Session["Handlekurv"] = hkm.OppdaterHandlekurv(StartId,StoppId,Voksen,Barn,Student,Honnor,avreise); 
+            Session["Handlekurv"] = hkm.OppdaterHandlekurv(StartId, StoppId, Voksen, Barn, Student, Honnor, avreise);
             return View("Handlekurv");
         }
         public int EnheterIKurv()
