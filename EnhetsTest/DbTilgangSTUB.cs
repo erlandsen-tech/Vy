@@ -34,10 +34,18 @@ namespace EnhetsTest
             hovedstrekning_Ider = { 1, 2, 3 },
             id = 1,
             lengdegrad = 0,
-            nett_id = 2,
+            nett_id = 1,
             stasjon_navn = "test",
             stasjon_sted = "Hamar",
             breddegrad = 3
+        };
+        Passasjer passasjer = new Passasjer
+        {
+            nedreAlder = 0,
+            ovreAlder = 90,
+            ptypId = 1,
+            typenavn = "test",
+            rabatt = 50
         };
         /* testdatametoder testes ikke*/
         public void addPassasjertyper() { }
@@ -167,10 +175,7 @@ namespace EnhetsTest
             }
             else return null;
         }
-        public Nett HentNett(int nettId)
-        {
-            if(nettId == )
-        }
+        public Nett HentNett(int nettId);
         List<Nett> HentNettEtterBegNavn(string begNavn);
         Passasjer HentPassasjer(int id);
         List<Passasjer> HentPassasjerTyper();
@@ -180,21 +185,80 @@ namespace EnhetsTest
         List<Stasjon> HentStasjonerEtterBegNavn(string begNavn);
         List<Stasjon> HentStasjonerPaHovedstrekning(int hovstrId);
         List<Stasjon> HentStasjonerPaNett(int nettId);
-        int leggTilHovedstrekning(Hovedstrekning hovst);
-        int leggTilNett(Nett nett);
-        int leggTilNett(string navn);
-        int leggTilStasjon(Stasjon stas);
-        int leggTilStasjon(string navn, string sted, double breddegrad, double lengdegrad);
-        bool OppdaterPassasjer(Passasjer passasjer);
-        bool OppdaterStasjon(Stasjon stasjon);
-        bool OppdaterStrekning(Hovedstrekning hvst);
-        Passasjer Passasjertype(int typeId);
-        bool settInnStasjonerIHovedstrekning(int hovstrId, IList<int> stasjonIder, int plassering);
-        bool settNyeHovedstrekningNavn(int hovstrId, string nyttNavn, string nyttKortnavn);
-        bool settNyeStasjonKoordinater(int stasjId, double breddegrad, double lengdegrad);
-        bool settNyeStasjonNavnOgSted(int stasjId, string nyttNavn, string nyttSted);
-        bool settNyttNettnavn(int nettId, string nyttNavn);
-        bool SettPris(double nyPris);
-        List<List<Stasjon>> stierMellomStasjoner(int ida, int idb);
+        int leggTilHovedstrekning(Hovedstrekning hovst)
+        {
+            return (hovst != null)? 1 : 0;
+        }
+        int leggTilNett(Nett nett)
+        {
+            return (nett != null) ? 1 : 0;
+        }
+        int leggTilNett(string navn)
+        {
+            return (navn != null && navn.Length > 0) ? 1 : 0;
+        }
+        int leggTilStasjon(Stasjon stas)
+        {
+            return (stas != null) ? 1 : 0;
+        }
+        int leggTilStasjon(string navn, string sted, double breddegrad, double lengdegrad)
+        {
+            return (navn != null && navn.Length > 0 && sted != null && sted.Length > 0
+                && breddegrad >= -90 && breddegrad <= 90 && lengdegrad >= -180 && lengdegrad <= 180) ? 1 : 0;
+        }
+
+        bool OppdaterPassasjer(Passasjer passasjer)
+        {
+            return (passasjer != null);
+        }
+        bool OppdaterStasjon(Stasjon stasjon)
+        {
+            return (stasjon != null) ? 1 : 0;
+        }
+        bool OppdaterStrekning(Hovedstrekning hvst)
+        {
+            return (hvst != null) ? 1 : 0;
+        }
+        Passasjer Passasjertype(int typeId)
+        {
+            if(typeId == 1)
+            {
+                return passasjer;
+            }
+        }
+        bool settInnStasjonerIHovedstrekning(int hovstrId, IList<int> stasjonIder, int plassering)
+        {
+            return (hovstrId = 1 && stasjonIder.Contains(1) && plassering == 1);
+        }
+        bool settNyeHovedstrekningNavn(int hovstrId, string nyttNavn, string nyttKortnavn)
+        {
+            return (hovstrId = 1 && nyttNavn != null && nyttKortnavn != null);
+        }
+        bool settNyeStasjonKoordinater(int stasjId, double breddegrad, double lengdegrad)
+        {
+            return (stasjId == 1
+                && breddegrad >= -90 && breddegrad <= 90 && lengdegrad >= -180 && lengdegrad <= 180);
+        }
+        bool settNyeStasjonNavnOgSted(int stasjId, string nyttNavn, string nyttSted)
+        {
+            return (stasjId == 1 && nyttNavn != null && nyttSted != null);
+        }
+        bool settNyttNettnavn(int nettId, string nyttNavn)
+        {
+            return (nettId == 1 && nyttNavn != null);
+        }
+        bool SettPris(double nyPris)
+        {
+            return (nyPris >= 0);
+        }
+        List<List<Stasjon>> stierMellomStasjoner(int ida, int idb)
+        {
+            List<Stasjon> lili = new List<Stasjon> { stasjon, stasjon, stasjon };
+            List<List<Stasjon>> lilili = new List<List<Stasjon>>();
+            lilili.Add(lili);
+            lilili.Add(lili);
+            lilili.Add(lili);
+            return lilili;
+        }
     }
 }
