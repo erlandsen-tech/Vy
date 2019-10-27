@@ -1,5 +1,4 @@
 ﻿using System.Data.Entity;
-using VyBillettBestilling.DAL;
 
 namespace VyBillettBestilling.DAL
 {
