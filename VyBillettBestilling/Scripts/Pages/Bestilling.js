@@ -55,6 +55,7 @@ function oppdaterantall() {
     getAntallenheterIHandlekurv();
 }
 function dialog() {
+    $("#dialog-confirm").removeClass('hidden');
     $("#dialog-confirm").dialog({
         autoopen: false,
         resizable: false,
@@ -81,6 +82,8 @@ function dialog() {
     });
 }
 function errordialog() {
+
+    $("#dialog-error").removeClass('hidden');
     $("#dialog-error").dialog({
         autoopen: false,
         resizable: false,

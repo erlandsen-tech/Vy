@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using VyBillettBestilling.Model;
 using VyBillettBestilling.BLL;
 using VyBillettBestilling.BLL.Methods;
+using VyBillettBestilling.Model;
 using VyBillettBestilling.ViewModels;
 
 namespace VyBillettBestilling.Controllers

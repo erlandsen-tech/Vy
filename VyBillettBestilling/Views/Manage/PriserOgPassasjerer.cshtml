@@ -15,8 +15,20 @@
 <body>
 
     <div class="bg femti ">
+        <div class="container">
+            <h4>Pris pr km</h4>
             @Html.Partial("Priser", Model.Pris);
+            <hr />
+            <h4>Rabatter og typenavn</h4>
             @Html.Partial("PassasjerTyper", Model.Passasjerer);
+        </div>
     </div>
 </body>
 </html>
+<script>
+    $(document).ready(function () {
+        $(".second_div").css({
+            'width': ($(".first_div").width() + 'px')
+        });
+    });
+</script>

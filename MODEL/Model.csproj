@@ -93,7 +93,6 @@
     <Compile Include="CSVstasjon.cs" />
     <Compile Include="Handlekurv.cs" />
     <Compile Include="HovedstrekningCreateView.cs" />
-    <Compile Include="Konverter.cs" />
     <Compile Include="Passasjer.cs" />
     <Compile Include="Pris.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
