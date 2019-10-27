@@ -11,27 +11,32 @@ namespace EnhetsTest
     class DbTilgangSTUB : IVyDbTilgang
     {
 
+        Pris pris = new Pris
+        {
+            Id = 1,
+            prisPrKm = 3
+        };
         Hovedstrekning strekk = new Hovedstrekning
         {
             hovstr_kortnavn = "test",
             hovstr_navn = "t",
             id = 1,
             nett_id = 1,
-            stasjon_Ider = { 1, 2, 3 }
+            stasjon_Ider = { 1 }
         };
 
         Nett nett = new Nett
         {
 
-            hovedstrekning_Ider = { 1, 2, 3 },
+            hovedstrekning_Ider = { 1  },
             id = 1,
             nett_navn = "testnett",
-            stasjon_Ider = { 1, 2, 3 }
+            stasjon_Ider = { 1 }
         };
 
         Stasjon stasjon = new Stasjon
         {
-            hovedstrekning_Ider = { 1, 2, 3 },
+            hovedstrekning_Ider = { 1 },
             id = 1,
             lengdegrad = 0,
             nett_id = 1,
@@ -47,6 +52,7 @@ namespace EnhetsTest
             typenavn = "test",
             rabatt = 50
         };
+
         /* testdatametoder testes ikke*/
         public void addPassasjertyper() { }
         public void addPris() { }
@@ -87,19 +93,15 @@ namespace EnhetsTest
             }
             return false;
         }
-        List<Hovedstrekning> HentAlleHovedstrekninger()
+        public List<Hovedstrekning> HentAlleHovedstrekninger()
         {
             var hvst = new List<Hovedstrekning>();
             hvst.Add(strekk);
-            hvst.Add(strekk);
-            hvst.Add(strekk);
             return hvst;
         }
-        List<Nett> HentAlleNett()
+        public List<Nett> HentAlleNett()
         {
             var nettListe = new List<Nett>();
-            nettListe.Add(nett);
-            nettListe.Add(nett);
             nettListe.Add(nett);
             return nettListe;
         }
@@ -107,11 +109,9 @@ namespace EnhetsTest
         {
             var stasjonListe = new List<Stasjon>();
             stasjonListe.Add(stasjon);
-            stasjonListe.Add(stasjon);
-            stasjonListe.Add(stasjon);
             return stasjonListe;
         }
-        List<string> HentAlleStasjonNavn()
+        public List<string> HentAlleStasjonNavn()
         {
             var stasjNavn = new List<String>();
             var stasjListe = HentAlleStasjoner();
@@ -135,8 +135,6 @@ namespace EnhetsTest
             {
                 var strekninger = new List<Hovedstrekning>();
                 strekninger.Add(strekk);
-                strekninger.Add(strekk);
-                strekninger.Add(strekk);
                 return strekninger;
             }
             else return null;
@@ -147,8 +145,6 @@ namespace EnhetsTest
             {
                 var strekninger = new List<Hovedstrekning>();
                 strekninger.Add(strekk);
-                strekninger.Add(strekk);
-                strekninger.Add(strekk);
                 return strekninger;
             }
             else return null;
@@ -157,9 +153,7 @@ namespace EnhetsTest
         {
             var strekninger = new List<Hovedstrekning>();
             strekninger.Add(strekk);
-            strekninger.Add(strekk);
-            strekninger.Add(strekk);
-            if (nettId == 2)
+            if (nettId == 1)
             {
                 return strekninger;
             }
@@ -167,24 +161,15 @@ namespace EnhetsTest
         }
         public List<Hovedstrekning> HentHovedstrekningerTilStasjon(int stasjId)
         {
-            var strekkListe = new List<HovedStrekning>();
-            strekkListe.Add(stekk);
+            var strekkListe = new List<Hovedstrekning>();
+            strekkListe.Add(strekk);
             if (stasjId == 1)
             {
                 return strekkListe;
             }
             else return null;
         }
-        public Nett HentNett(int nettId);
-        List<Nett> HentNettEtterBegNavn(string begNavn);
-        Passasjer HentPassasjer(int id);
-        List<Passasjer> HentPassasjerTyper();
-        Pris HentPris();
-        Stasjon HentStasjon(int stasjId);
-        List<Stasjon> HentStasjoner(string stasjNavn, string optSted = "");
-        List<Stasjon> HentStasjonerEtterBegNavn(string begNavn);
-        List<Stasjon> HentStasjonerPaHovedstrekning(int hovstrId);
-        List<Stasjon> HentStasjonerPaNett(int nettId);
+
         public int leggTilHovedstrekning(Hovedstrekning hovst)
         {
             return (hovst != null)? 1 : 0;
@@ -260,5 +245,107 @@ namespace EnhetsTest
             lilili.Add(lili);
             return lilili;
         }
+
+        public Nett HentNett(int nettId)
+        {
+            if (nettId == 1)
+            {
+                return nett;
+            }
+            else return null;
+        }
+        public List<Nett> HentNettEtterBegNavn(string begNavn)
+        {
+            var nettListe = new List<Nett>();
+            nettListe.Add(nett);
+            if (begNavn == "testnett")
+            {
+                return nettListe;
+            }
+            else return null;
+        }
+        public Passasjer HentPassasjer(int id)
+        {
+            if (id == 1)
+            {
+                return passasjer;
+            }
+            else return null;
+        }
+        public List<Passasjer> HentPassasjerTyper()
+        {
+            var passasjerTypeListe = new List<Passasjer>();
+            passasjerTypeListe.Add(passasjer);
+            return passasjerTypeListe;
+        }
+        public Pris HentPris()
+        {
+            return pris;
+        }
+        public Stasjon HentStasjon(int stasjId)
+        {
+            if (stasjId == 1)
+            {
+                return stasjon;
+            }
+            else return null;
+        }
+        public List<Stasjon> HentStasjoner(string stasjNavn, string optSted = "")
+        {
+            var sL = new List<Stasjon>();
+            if(stasjNavn == "test")
+            {
+                sL.Add(stasjon);
+                return sL;
+            }
+            return null;
+        }
+        public List<Stasjon> HentStasjonerEtterBegNavn(string begNavn)
+        {
+            var sL = new List<Stasjon>();
+            if(begNavn == "test")
+            {
+                sL.Add(stasjon);
+                return sL;
+            }
+            return null;
+        }
+        public List<Stasjon> HentStasjonerPaHovedstrekning(int hovstrId)
+        {
+            var sL = new List<Stasjon>();
+            if (hovstrId == 1)
+            {
+                sL.Add(stasjon);
+                return sL;
+            }
+            else return null;
+        }
+        public List<Stasjon> HentStasjonerPaNett(int nettId)
+        {
+            var sL = new List<Stasjon>();
+            if(nettId == 1)
+            {
+                sL.Add(stasjon);
+                return sL;
+            }
+            else return null;
+        }
+        public int leggTilHovedstrekning(Hovedstrekning hovst);
+        public int leggTilNett(Nett nett);
+        public int leggTilNett(string navn);
+        public int leggTilStasjon(Stasjon stas);
+        public int leggTilStasjon(string navn, string sted, double breddegrad, double lengdegrad);
+        public bool OppdaterPassasjer(Passasjer passasjer);
+        public bool OppdaterStasjon(Stasjon stasjon);
+        public bool OppdaterStrekning(Hovedstrekning hvst);
+        public Passasjer Passasjertype(int typeId);
+        public bool settInnStasjonerIHovedstrekning(int hovstrId, IList<int> stasjonIder, int plassering);
+        public bool settNyeHovedstrekningNavn(int hovstrId, string nyttNavn, string nyttKortnavn);
+        public bool settNyeStasjonKoordinater(int stasjId, double breddegrad, double lengdegrad);
+        public bool settNyeStasjonNavnOgSted(int stasjId, string nyttNavn, string nyttSted);
+        public bool settNyttNettnavn(int nettId, string nyttNavn);
+        public bool SettPris(double nyPris);
+        public List<List<Stasjon>> stierMellomStasjoner(int ida, int idb);
+
     }
 }
