@@ -169,6 +169,83 @@ namespace EnhetsTest
             }
             else return null;
         }
+
+        public int leggTilHovedstrekning(Hovedstrekning hovst)
+        {
+            return (hovst != null)? 1 : 0;
+        }
+        public int leggTilNett(Nett nett)
+        {
+            return (nett != null) ? 1 : 0;
+        }
+        public int leggTilNett(string navn)
+        {
+            return (navn != null && navn.Length > 0) ? 1 : 0;
+        }
+        public int leggTilStasjon(Stasjon stas)
+        {
+            return (stas != null) ? 1 : 0;
+        }
+        public int leggTilStasjon(string navn, string sted, double breddegrad, double lengdegrad)
+        {
+            return (navn != null && navn.Length > 0 && sted != null && sted.Length > 0
+                && breddegrad >= -90 && breddegrad <= 90 && lengdegrad >= -180 && lengdegrad <= 180) ? 1 : 0;
+        }
+
+        public bool OppdaterPassasjer(Passasjer passasjer)
+        {
+            return (passasjer != null);
+        }
+        public bool OppdaterStasjon(Stasjon stasjon)
+        {
+            return (stasjon != null) ? 1 : 0;
+        }
+        public bool OppdaterStrekning(Hovedstrekning hvst)
+        {
+            return (hvst != null) ? 1 : 0;
+        }
+        public Passasjertype(int typeId)
+        {
+            if(typeId == 1)
+            {
+                return passasjer;
+            }
+        }
+        public bool settInnStasjonerIHovedstrekning(int hovstrId, IList<int> stasjonIder, int plassering)
+        {
+            return (hovstrId = 1 && stasjonIder.Contains(1) && plassering == 1);
+        }
+        public bool settNyeHovedstrekningNavn(int hovstrId, string nyttNavn, string nyttKortnavn)
+        {
+            return (hovstrId = 1 && nyttNavn != null && nyttKortnavn != null);
+        }
+        public bool settNyeStasjonKoordinater(int stasjId, double breddegrad, double lengdegrad)
+        {
+            return (stasjId == 1
+                && breddegrad >= -90 && breddegrad <= 90 && lengdegrad >= -180 && lengdegrad <= 180);
+        }
+        public bool settNyeStasjonNavnOgSted(int stasjId, string nyttNavn, string nyttSted)
+        {
+            return (stasjId == 1 && nyttNavn != null && nyttSted != null);
+        }
+        public bool settNyttNettnavn(int nettId, string nyttNavn)
+        {
+            return (nettId == 1 && nyttNavn != null);
+        }
+        public bool SettPris(double nyPris)
+        {
+            return (nyPris >= 0);
+        }
+        public List<List<Stasjon>> stierMellomStasjoner(int ida, int idb)
+        {
+            List<Stasjon> lili = new List<Stasjon> { stasjon, stasjon, stasjon };
+            List<List<Stasjon>> lilili = new List<List<Stasjon>>();
+            lilili.Add(lili);
+            lilili.Add(lili);
+            lilili.Add(lili);
+            return lilili;
+        }
+
         public Nett HentNett(int nettId)
         {
             if (nettId == 1)
@@ -269,5 +346,6 @@ namespace EnhetsTest
         public bool settNyttNettnavn(int nettId, string nyttNavn);
         public bool SettPris(double nyPris);
         public List<List<Stasjon>> stierMellomStasjoner(int ida, int idb);
+
     }
 }
