@@ -52,7 +52,7 @@ namespace VyBillettBestilling.BLL.Methods
         public void endreStrekning(Hovedstrekning str, List<bool> ulikheter)
         {
             var dbt = new VyDbTilgang();
-            for(int i = 0; i < ulikheter.Count; i++)
+            for (int i = 0; i < ulikheter.Count; i++)
             {
                 if (!ulikheter[i])
                 {
@@ -99,12 +99,12 @@ namespace VyBillettBestilling.BLL.Methods
             var stasjoner = true;
             var fjerneStasj = fjernedeStasjoner(nyHvst);
             var nyeStasj = nyeStasjoner(nyHvst);
-            if(fjerneStasj.Count > 0 || nyeStasj.Count > 0)
+            if (fjerneStasj.Count > 0 || nyeStasj.Count > 0)
             {
                 stasjoner = false;
             }
             var nettid = gammelHvst.nett_id == nyHvst.nett_id;
-            bool[] likheter =  { navn, kortnavn, stasjoner, nettid };
+            bool[] likheter = { navn, kortnavn, stasjoner, nettid };
             return likheter.ToList();
         }
         private static int parseNettId(String nettid)

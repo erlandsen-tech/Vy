@@ -11,7 +11,7 @@ using TrackerEnabledDbContext;
 
 namespace VyBillettBestilling.DAL
 {
-    public class VyDbContext : TrackerContext
+    public class VyDbContext : TrackerContext, IVyDbContext
     {
         public VyDbContext() : base("name=BillettBase")
         {
@@ -44,7 +44,7 @@ namespace VyBillettBestilling.DAL
         // Hvert Nett er en samling av DbHovedstrekning-er som er forbundet med hverandre.
 
         // Klasser for linjenettet:
-        
+
         [TrackChanges]
         public class DbNett
         {
@@ -100,7 +100,7 @@ namespace VyBillettBestilling.DAL
                 {
                     Eier = eierStrekning;
                 }
-                
+
                 public DbHovedstrekningStasjon faaDbElement(DbStasjon stas)
                 {
                     return StasjonerNummerert.First(hosta => hosta.Stasjon.Equals(stas));
@@ -116,7 +116,7 @@ namespace VyBillettBestilling.DAL
                 {
                     return StasjonerNummerert.OrderBy(hosta => hosta.rekkenr).ToList();
                 }
-                
+
                 public List<DbStasjon> ToList() => StasjonerNummerert.OrderBy(hosta => hosta.rekkenr).Select(st => st.Stasjon).ToList();
                 public DbStasjon[] ToArray() => StasjonerNummerert.OrderBy(hosta => hosta.rekkenr).Select(st => st.Stasjon).ToArray();
                 public int Count() => StasjonerNummerert.Count();
@@ -189,29 +189,29 @@ namespace VyBillettBestilling.DAL
                     foreach (var hosta in ordnet)
                         hosta.rekkenr = nr += 100;
                 }
-            /* Clear() og Remove-metodene fungerer ikke, lager bare kroll.
-             * Kraesjer nar Stasjon og Hovedstrekning er Required i DbHovedstrekningStasjon,
-             * og setter null-verdier i tabellen nar de ikke Required, uten at postene blir borte */
-            //public void Clear() { StasjonerNummerert.Clear(); }
-            //public bool Remove(DbStasjon dbst)
-            //{
-            //    int idx = StasjonerNummerert.FindIndex(st => st.Stasjon.Equals(dbst));
-            //    if (idx < 0)
-            //        return false;
-            //    StasjonerNummerert.RemoveAt(idx);
-            //return true;
-            //}
-            //public void RemoveAt(int index)
-            //{
-            //    StasjonerNummerert.Remove(StasjonerNummerert.OrderBy(hosta => hosta.rekkenr).ElementAt(index));
-            //}
-            //public void RemoveRange(int index, int count)
-            //{
-            //    if (index < 0 | count < 0 | index + count > StasjonerNummerert.Count())
-            //        throw new ArgumentOutOfRangeException("index < 0 || count < 0 || index+count > Stasjoner_Count()");
-            //    var ordnet = StasjonerNummerert.OrderBy(hosta => hosta.rekkenr).Skip(index).Take(count);
-            //    StasjonerNummerert.RemoveAll(hosta => ordnet.Contains(hosta));
-            //}
+                /* Clear() og Remove-metodene fungerer ikke, lager bare kroll.
+                 * Kraesjer nar Stasjon og Hovedstrekning er Required i DbHovedstrekningStasjon,
+                 * og setter null-verdier i tabellen nar de ikke Required, uten at postene blir borte */
+                //public void Clear() { StasjonerNummerert.Clear(); }
+                //public bool Remove(DbStasjon dbst)
+                //{
+                //    int idx = StasjonerNummerert.FindIndex(st => st.Stasjon.Equals(dbst));
+                //    if (idx < 0)
+                //        return false;
+                //    StasjonerNummerert.RemoveAt(idx);
+                //return true;
+                //}
+                //public void RemoveAt(int index)
+                //{
+                //    StasjonerNummerert.Remove(StasjonerNummerert.OrderBy(hosta => hosta.rekkenr).ElementAt(index));
+                //}
+                //public void RemoveRange(int index, int count)
+                //{
+                //    if (index < 0 | count < 0 | index + count > StasjonerNummerert.Count())
+                //        throw new ArgumentOutOfRangeException("index < 0 || count < 0 || index+count > Stasjoner_Count()");
+                //    var ordnet = StasjonerNummerert.OrderBy(hosta => hosta.rekkenr).Skip(index).Take(count);
+                //    StasjonerNummerert.RemoveAll(hosta => ordnet.Contains(hosta));
+                //}
             }
 
             public DbHovedstrekning(string navn, DbNett nett, string kortnavn)
@@ -223,7 +223,8 @@ namespace VyBillettBestilling.DAL
                 StasjonerNummerert = new List<DbHovedstrekningStasjon>();
                 Stasjoner = new StasjonListeHjelper(this);
             }
-            public DbHovedstrekning() {
+            public DbHovedstrekning()
+            {
                 Stasjoner = new StasjonListeHjelper(this); // Ma ha denne her, den regenereres ikke av seg selv
             } // Ma ogsa ha en parameterlos konstruktor.
         }

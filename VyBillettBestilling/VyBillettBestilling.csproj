@@ -295,7 +295,6 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
-    <Content Include="README.md" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -442,7 +441,7 @@
       <Name>BLL</Name>
     </ProjectReference>
     <ProjectReference Include="..\DAL\DAL.csproj">
-      <Project>{18BC18BB-5718-4F39-B085-1A74EF637908}</Project>
+      <Project>{18bc18bb-5718-4f39-b085-1a74ef637908}</Project>
       <Name>DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\MODEL\Model.csproj">
