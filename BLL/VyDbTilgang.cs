@@ -8,12 +8,21 @@ using static VyBillettBestilling.DAL.VyDbContext;
 
 namespace VyBillettBestilling.BLL
 {
-    public class VyDbTilgang
+    public class VyDbTilgang : IVyDbTilgang
     {
+        private IVyDbContext _vyDbContext;
+        public VyDbTilgang()
+        {
+            _vyDbContext = new VyDbContext();
+        }
+        public VyDbTilgang(IVyDbContext stub)
+        {
+            _vyDbContext = stub;
+        }
         /** Oppdatering av databasenheter
          * 
          */
-        public void OppdaterStasjon(Stasjon stasjon)
+        public bool OppdaterStasjon(Stasjon stasjon)
         {
             using (var db = new VyDbContext())
             {
@@ -26,40 +35,91 @@ namespace VyBillettBestilling.BLL
                     }
                 }
                 var dbStasjon = db.Stasjoner.Find(stasjon.id);
-                dbStasjon.Hovedstrekninger = hvstList;
-                dbStasjon.Lengdegrad = stasjon.lengdegrad;
-                dbStasjon.Breddegrad = stasjon.breddegrad;
-                dbStasjon.Nett = db.Nett.Find(stasjon.nett_id);
-                dbStasjon.StasjNavn = stasjon.stasjon_navn;
-                dbStasjon.StasjSted = stasjon.stasjon_sted;
-                db.SaveChanges();
+                if (dbStasjon != null)
+                {
+                    if (stasjon.breddegrad >= 0 && stasjon.lengdegrad <= 90)
+                    {
+                        dbStasjon.Breddegrad = stasjon.breddegrad;
+                    }
+                    else return false;
+                    if (stasjon.lengdegrad >= 0 && stasjon.lengdegrad <= 180)
+                    {
+                        dbStasjon.Lengdegrad = stasjon.lengdegrad;
+                    }
+                    else return false;
+                    dbStasjon.Hovedstrekninger = hvstList;
+                    dbStasjon.Lengdegrad = stasjon.lengdegrad;
+                    if (db.Nett.Find(stasjon.nett_id) != null)
+                    {
+                        dbStasjon.Nett = db.Nett.Find(stasjon.nett_id);
+                    }
+                    else return false;
+                    if (!string.IsNullOrEmpty(stasjon.stasjon_navn))
+                    {
+                        dbStasjon.StasjNavn = stasjon.stasjon_navn;
+                    }
+                    else return false;
+
+                    dbStasjon.StasjSted = stasjon.stasjon_sted;
+                    db.SaveChanges();
+                    return true;
+                }
             }
+            return false;
         }
-        public void OppdaterPassasjer(Passasjer passasjer)
+        public bool OppdaterPassasjer(Passasjer passasjer)
         {
             using (var db = new VyDbContext())
             {
                 var dbPassasjer = db.Passasjertyper.Find(passasjer.ptypId);
-                dbPassasjer.Rabatt = passasjer.rabatt;
-                dbPassasjer.TypeNavn = passasjer.typenavn;
-                dbPassasjer.OvreAldersgrense = passasjer.ovreAlder;
-                dbPassasjer.NedreAldersgrense = passasjer.nedreAlder;
-                db.SaveChanges();
+                if (dbPassasjer != null)
+                {
+                    if (passasjer.rabatt > 0 && passasjer.rabatt <= 100)
+                    {
+                        dbPassasjer.Rabatt = passasjer.rabatt;
+                    }else return false;
+                    if (!string.IsNullOrEmpty(passasjer.typenavn))
+                    {
+                        dbPassasjer.TypeNavn = passasjer.typenavn;
+                    } else return false;
+                    if (passasjer.ovreAlder > 0 && passasjer.nedreAlder > 0)
+                    {
+                        dbPassasjer.OvreAldersgrense = passasjer.ovreAlder;
+                        dbPassasjer.NedreAldersgrense = passasjer.nedreAlder;
+                    }else return false;
+                    db.SaveChanges();
+                    return true;
+                }
             }
+            return false;
         }
-        public void OppdaterStrekning(Hovedstrekning hvst)
+        public bool OppdaterStrekning(Hovedstrekning hvst)
         {
             using (var db = new VyDbContext())
             {
                 var dbStrekning = db.Hovedstrekninger.Find(hvst.id);
-                var dbStasjonListe = new List<DbHovedstrekningStasjon>();
-                foreach (int i in hvst.stasjon_Ider)
+                if (dbStrekning != null)
                 {
-                    var stasjon = db.Stasjoner.Find(i);
+                    var dbStasjonListe = new List<DbHovedstrekningStasjon>();
+                    foreach (int i in hvst.stasjon_Ider)
+                    {
+                        var stasjon = db.Stasjoner.Find(i);
+                    }
+                    if(!string.IsNullOrEmpty(hvst.hovstr_kortnavn) && !string.IsNullOrEmpty(hvst.hovstr_navn))
+                    {
+                    dbStrekning.HovstrKortNavn = hvst.hovstr_kortnavn;
+                    dbStrekning.HovstrNavn = hvst.hovstr_navn;
+                    }
+                    if (db.Nett.Find(hvst.nett_id) != null)
+                    {
+                        dbStrekning.Nett = db.Nett.Find(hvst.nett_id);
+                    }
+                    else return false;
+                    db.SaveChanges();
+                    return true;
                 }
-                dbStrekning.HovstrKortNavn = hvst.hovstr_kortnavn;
-                dbStrekning.HovstrNavn = hvst.hovstr_navn;
-                dbStrekning.Nett = db.Nett.Find(hvst.nett_id);
+
+                return false;
             }
         }
         /*
@@ -125,16 +185,22 @@ namespace VyBillettBestilling.BLL
                 return pris;
             }
         }
-        public void SettPris(double nyPris)
+        public bool SettPris(double nyPris)
         {
-            using (var db = new VyDbContext())
+            if (nyPris > 0)
             {
-                var dbPris = db.Pris.FirstOrDefault();
-                dbPris.prisPrKm = nyPris;
-                db.SaveChanges();
+                using (var db = new VyDbContext())
+                {
+                    var dbPris = db.Pris.FirstOrDefault();
+                    dbPris.prisPrKm = nyPris;
+                    db.SaveChanges();
+                }
+                return true;
             }
+            else
+                return false;
         }
-        
+
         public Stasjon HentStasjon(int stasjId)
         {
             using (var db = new VyDbContext())
@@ -774,7 +840,7 @@ namespace VyBillettBestilling.BLL
             }
             return false;
         }
-        
+
         public bool settNyeHovedstrekningNavn(int hovstrId, string nyttNavn, string nyttKortnavn)
         {   // Null-verdier pa navnene betyr a beholde gammelt navn
             using (var db = new VyDbContext())
